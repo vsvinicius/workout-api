@@ -7,18 +7,20 @@ import { ExercisesRepository } from 'src/shared/database/repositories/exercises.
 export class ExercisesService {
   constructor(private readonly exerciseRepo: ExercisesRepository) {}
   create(createExerciseDto: CreateExerciseDto) {
-    const { name, reps, sets, workoutId } = createExerciseDto;
+    const { name, reps, sets, workoutId, muscleGroup } = createExerciseDto;
     return this.exerciseRepo.create({
       data: {
         name,
         reps,
         sets,
         workoutId,
+        muscleGroup,
       },
     });
   }
 
   findByWorkout(workoutId: string) {
+    console.debug({ workoutId });
     return this.exerciseRepo.findMany({ where: { workoutId } });
   }
 

@@ -21,7 +21,7 @@ export class ExercisesController {
   }
 
   @Get('/workout/:workout_id')
-  findByWorkout(@Param(':workout_id') workoutId: string) {
+  findByWorkout(@Param('workout_id') workoutId: string) {
     return this.exercisesService.findByWorkout(workoutId);
   }
 

@@ -13,6 +13,10 @@ export class CreateExerciseDto {
   @IsNotEmpty()
   sets: string;
 
+  @IsString()
+  @IsNotEmpty()
+  muscleGroup: string;
+
   @IsUUID()
   @IsNotEmpty()
   workoutId: string;
