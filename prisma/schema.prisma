@@ -44,6 +44,9 @@ model Exercise {
   id        String   @id @default(uuid()) @db.Uuid
   workoutId String   @map("workout_id") @db.Uuid
   name      String
+  reps      String
+  sets      String
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   deletedAt DateTime?
