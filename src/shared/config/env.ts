@@ -16,7 +16,7 @@ class Env {
   @IsOptional()
   port: number;
 }
-
+console.debug(process.env);
 export const env: Env = plainToInstance(Env, {
   port: parseInt(process.env.PORT, 10) || 3000,
   dbUrl: process.env.POSTGRES_PRISMA_URL,
