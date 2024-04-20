@@ -19,9 +19,22 @@ export class ExercisesService {
     });
   }
 
-  findByWorkout(workoutId: string) {
-    console.debug({ workoutId });
-    return this.exerciseRepo.findMany({ where: { workoutId } });
+  async findByWorkout(workoutId: string) {
+    const exercises = await this.exerciseRepo.findMany({
+      where: { workoutId },
+      include: {
+        personalRecords: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 1,
+        },
+      },
+    });
+    return exercises.map((exercise) => ({
+      ...exercise,
+      lastPersonalRecord: exercise.personalRecords[0] || null,
+    }));
   }
 
   findOne(exerciseId: string) {

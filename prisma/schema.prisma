@@ -5,13 +5,13 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native","rhel-openssl-3.0.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
 }
 
 model User {
@@ -52,7 +52,23 @@ model Exercise {
   updatedAt DateTime  @default(now())
   deletedAt DateTime?
 
-  workout Workout @relation(fields: [workoutId], references: [id])
+  workout        Workout          @relation(fields: [workoutId], references: [id])
+  personalRecords PersonalRecord[]
 
   @@map("exercises")
+}
+
+model PersonalRecord {
+  id         String @id @default(uuid()) @db.Uuid
+  exerciseId String @map("exercise_id") @db.Uuid
+  weight     String
+  unit       String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  exercise Exercise @relation(fields: [exerciseId], references: [id])
+
+  @@map("personal_records")
 }

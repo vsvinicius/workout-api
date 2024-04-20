@@ -9,6 +9,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({ origin: '*', allowedHeaders: '*' });
 
-  await app.listen(env.port);
+  await app.listen(env.port, '192.168.1.94');
 }
 bootstrap();
